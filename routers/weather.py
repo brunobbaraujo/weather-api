@@ -34,7 +34,7 @@ def get_weather_data(
         .offset(skip)
         .all()
     )
-    return {"status": "success", "results": len(data), "notes": data}
+    return {"status": "success", "results": len(data), "data": data}
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
@@ -48,7 +48,7 @@ def create_data(payload: schemas.WeatherBaseSchema, db: Session = Depends(get_db
 
 @router.patch("/{dataId}")
 def update_note(
-    dataId: int, payload: schemas.WeatherBaseSchema, db: Session = Depends(get_db)
+    dataId: str, payload: schemas.WeatherBaseSchema, db: Session = Depends(get_db)
 ):
     data_query = db.query(models.WeatherModel).filter(models.WeatherModel.id == dataId)
     db_data = data_query.first()

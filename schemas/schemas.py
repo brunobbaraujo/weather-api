@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from typing import List
 
 from pydantic import BaseModel
@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class WeatherBaseSchema(BaseModel):
     id: str | None = None
     cod_city: int
-    date: datetime.date
+    date: date
     hour: int
     precipitation: float | None = None
     dry_bulb_temperature: float | None = None

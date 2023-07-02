@@ -1,9 +1,10 @@
-from helper import create_connection_string, read_config
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-config = read_config("dbconfig.yml")
+from database.helper import create_connection_string, read_config
+
+config = read_config("database/dbconfig.yml")
 
 connection_string = create_connection_string(
     config["user"],
@@ -12,7 +13,7 @@ connection_string = create_connection_string(
     config["port"],
     config["database"],
 )
-engine = create_engine(connection_string, connect_args={"check_same_thread": False})
+engine = create_engine(connection_string, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
