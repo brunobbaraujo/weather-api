@@ -1,17 +1,4 @@
-from routers import city
-from routers import weather
-import models.models as models
+import uvicorn
 
-from fastapi import FastAPI
-from database.database import engine
-
-models.Base.metadata.create_all(bind=engine)
-
-app = FastAPI()
-
-app.include_router(weather.router, tags=['Weather'], prefix='/api/weather')
-app.include_router(city.router, tags=['City'], prefix='/api/city')
-
-@app.get("/api/healthcheck")
-def root():
-    return {"message": "API should be working properly."}
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
