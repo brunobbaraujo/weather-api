@@ -6,7 +6,8 @@ from database.database import Base
 
 class WeatherModel(Base):
     __tablename__ = "grid_weather_data"
-    cod_city = Column(Integer, primary_key=True, index=True, nullable=False)
+    id = Column(GUID, primary_key=True, server_default=GUID_SERVER_DEFAULT_POSTGRESQL)
+    cod_city = Column(Integer, index=True, nullable=False)
     date = Column(Date, index=True, nullable=False)
     hour = Column(Integer, nullable=False)
     precipitation = Column(Float(8), nullable=True)

@@ -30,11 +30,10 @@ class WeatherBaseSchema(BaseModel):
 class ListWeatherResponse(BaseModel):
     status: str
     results: int
-    notes: List[WeatherBaseSchema]
+    data: List[WeatherBaseSchema]
 
 
 class CityBaseSchema(BaseModel):
-    id: str | None = None
     cod_city: int
     latitude: float | None = None
     longitude: float | None = None
@@ -47,4 +46,4 @@ class CityBaseSchema(BaseModel):
 class ListCityResponse(BaseModel):
     status: str
     results: int
-    notes: List[WeatherBaseSchema]
+    data: List[CityBaseSchema]
